@@ -2,12 +2,18 @@
 
 .scholarship-container {
   max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
+
+  /* ADD THIS ↓ */
+
+
+  transform: translateX(80px); /* adjust as needed */
+
+
 }
+
 
 /* Header Section */
 .header-section {
@@ -121,6 +127,24 @@
   background: #c0392b;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+}
+
+.refresh-button {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+}
+
+.refresh-button:hover {
+  background: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.6);
 }
 
 /* Scholarship Cards Grid */
@@ -423,3 +447,83 @@
 .scholarship-card:nth-child(6) { animation-delay: 0.6s; }
 .scholarship-card:nth-child(7) { animation-delay: 0.7s; }
 .scholarship-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* Loading and Error States */
+.loading-container {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.loading-spinner {
+  font-size: 3rem;
+  animation: spin 2s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.error-container {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(231, 76, 60, 0.1);
+  border: 2px solid #e74c3c;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.error-container p {
+  color: #e74c3c;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.no-scholarships {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  grid-column: 1 / -1;
+}
+
+.no-scholarships p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin: 10px 0;
+}
+
+.no-scholarships p:first-child {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+/* J&K Special Note */
+.jk-note {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 15px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+}
+
+.jk-note p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
