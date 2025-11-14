@@ -1,0 +1,425 @@
+/* Scholarship.css - Modern, Clean UI with Focus on Girls Scholarships */
+
+.scholarship-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Header Section */
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.main-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+/* Filter Section */
+.filter-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.filter-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.dropdown-arrow {
+  transition: transform 0.3s ease;
+}
+
+.filter-button:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 200px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #ecf0f1;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.reset-button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.reset-button:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+}
+
+/* Scholarship Cards Grid */
+.scholarships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.scholarship-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.scholarship-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.scholarship-card.high::before {
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.scholarship-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.scholarship-name {
+  font-size: 1.3rem;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: 600;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.days-remaining {
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  margin-bottom: 15px;
+}
+
+.description {
+  color: #7f8c8d;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.eligibility-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.eligibility-tag {
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.scholarship-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.amount, .expiry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.label {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 1rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.card-footer {
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.click-hint {
+  color: #667eea;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Bank Schemes Section */
+.bank-schemes-section {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+.bank-schemes-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+  scrollbar-width: thin;
+  scrollbar-color: #667eea #ecf0f1;
+}
+
+.bank-schemes-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.bank-schemes-container::-webkit-scrollbar-track {
+  background: #ecf0f1;
+  border-radius: 10px;
+}
+
+.bank-schemes-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
+.bank-scheme-card {
+  min-width: 280px;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.bank-scheme-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-color: #667eea;
+}
+
+.bank-logo {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.bank-name {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.scheme-name {
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.scheme-details {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.interest-rate, .max-amount {
+  text-align: center;
+}
+
+.apply-hint {
+  color: #667eea;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scholarship-container {
+    padding: 15px;
+  }
+  
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .scholarships-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .bank-schemes-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .bank-scheme-card {
+    min-width: 100%;
+    max-width: 350px;
+  }
+  
+  .filter-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .filter-button, .reset-button {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section {
+    padding: 20px;
+  }
+  
+  .main-title {
+    font-size: 1.5rem;
+  }
+  
+  .scholarship-card {
+    padding: 20px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .scholarship-name {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scholarship-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.scholarship-card:nth-child(1) { animation-delay: 0.1s; }
+.scholarship-card:nth-child(2) { animation-delay: 0.2s; }
+.scholarship-card:nth-child(3) { animation-delay: 0.3s; }
+.scholarship-card:nth-child(4) { animation-delay: 0.4s; }
+.scholarship-card:nth-child(5) { animation-delay: 0.5s; }
+.scholarship-card:nth-child(6) { animation-delay: 0.6s; }
+.scholarship-card:nth-child(7) { animation-delay: 0.7s; }
+.scholarship-card:nth-child(8) { animation-delay: 0.8s; }
