@@ -12,6 +12,7 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
+import "./StudentRoadmap.css";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
@@ -20,7 +21,7 @@ const roadmapData = {
     {
       id: "science",
       title: "Science",
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <BookOpen className="icon-small" />,
       color: "blue",
       description: "Physics, Chemistry, Mathematics/Biology",
       hasSubStreams: true,
@@ -54,7 +55,7 @@ const roadmapData = {
     {
       id: "commerce",
       title: "Commerce",
-      icon: <TrendingUp className="w-6 h-6" />,
+      icon: <TrendingUp className="icon-small" />,
       color: "green",
       description: "Accountancy, Business Studies, Economics",
       hasSubStreams: true,
@@ -88,7 +89,7 @@ const roadmapData = {
     {
       id: "arts",
       title: "Arts/Humanities",
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="icon-small" />,
       color: "purple",
       description: "History, Political Science, Geography, Psychology",
       hasSubStreams: true,
@@ -124,7 +125,7 @@ const roadmapData = {
     {
       id: "engineering",
       title: "Engineering",
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <BookOpen className="icon-small" />,
       color: "blue",
       description: "B.Tech/BE in various specializations",
       hasSubStreams: true,
@@ -182,7 +183,7 @@ const roadmapData = {
     {
       id: "medical",
       title: "Medical",
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <BookOpen className="icon-small" />,
       color: "red",
       description: "MBBS, BDS, BAMS, BHMS, B.Pharm",
       hasSubStreams: true,
@@ -228,7 +229,7 @@ const roadmapData = {
     {
       id: "management",
       title: "Management",
-      icon: <TrendingUp className="w-6 h-6" />,
+      icon: <TrendingUp className="icon-small" />,
       color: "green",
       description: "BBA, B.Com, Integrated MBA",
       hasSubStreams: true,
@@ -274,7 +275,7 @@ const roadmapData = {
     {
       id: "design",
       title: "Design & Arts",
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="icon-small" />,
       color: "purple",
       description: "B.Des, BFA, B.Arch, Fashion Design",
       hasSubStreams: true,
@@ -322,7 +323,7 @@ const roadmapData = {
     {
       id: "tech",
       title: "Technology & IT",
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <BookOpen className="icon-small" />,
       color: "blue",
       description: "Software development, data science, cloud computing",
       hasSubStreams: true,
@@ -368,7 +369,7 @@ const roadmapData = {
     {
       id: "management",
       title: "Management & Business",
-      icon: <TrendingUp className="w-6 h-6" />,
+      icon: <TrendingUp className="icon-small" />,
       color: "green",
       description: "MBA, business administration, and leadership programs",
       hasSubStreams: true,
@@ -402,7 +403,7 @@ const roadmapData = {
     {
       id: "government",
       title: "Government Services",
-      icon: <Users className="w-6 h-6" />,
+      icon: <Users className="icon-small" />,
       color: "orange",
       description: "Civil services and public sector jobs",
       hasSubStreams: true,
@@ -448,7 +449,7 @@ const roadmapData = {
     {
       id: "research",
       title: "Research & Higher Studies",
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <BookOpen className="icon-small" />,
       color: "purple",
       description: "Advanced academic and research paths",
       hasSubStreams: true,
@@ -650,25 +651,25 @@ const StudentRoadmap = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         whileHover={{ y: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
-        className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-2xl shadow-xl overflow-hidden border border-slate-600 backdrop-blur-lg cursor-pointer hover:border-blue-400/50 transition-all duration-300"
+        className="stream-card"
         onClick={() => selectStream(stream.id)}
       >
         <div className="relative overflow-hidden">
-          <div className={`absolute top-0 right-0 w-32 h-32 ${colors.chart} rounded-full -mr-16 -mt-16 opacity-20 blur-xl`}></div>
-          <div className="p-6 relative z-10">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-4">
+          <div className={`color-bubble ${colors.colorClass}`}></div>
+          <div className="card-content">
+            <div className="card-header">
+                <div className="icon-container">
                 <motion.div 
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`p-4 rounded-2xl ${colors.light} ${colors.text} shadow-lg border-2 ${colors.border}`}
+                  className={`icon-wrapper ${colors.colorClass}`}
                 >
                   {stream.icon}
                 </motion.div>
                 <div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <h3 className="card-title">
                     {stream.title}
                   </h3>
-                  <p className="text-sm md:text-base text-gray-400 mt-1" style={{ fontFamily: 'Poppins, sans-serif' }}>
+                  <p className="card-description">
                     {stream.description}
                   </p>
                 </div>
@@ -676,19 +677,19 @@ const StudentRoadmap = () => {
               <motion.div
                 animate={{ x: [0, 3, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="text-cyan-400"
+                className="chevron-icon"
               >
                 <ChevronRight className="w-6 h-6" />
               </motion.div>
             </div>
 
-            <div className="flex items-center justify-between mt-4">
-              <span className={`px-3 py-1 rounded-full text-xs md:text-sm font-medium ${colors.text} ${colors.light} border ${colors.border}`}>
+            <div className="card-footer">
+              <span className={`explore-badge ${colors.colorClass}`}>
                 Click to Explore →
               </span>
               <div className="flex gap-2">
                 {stream.hasSubStreams && (
-                  <span className="px-2 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-xs font-medium border border-cyan-500/30">
+                  <span className="multiple-options-badge">
                     Multiple Options
                   </span>
                 )}
@@ -707,11 +708,11 @@ const StudentRoadmap = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         whileHover={{ x: -5, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-        className="bg-linear-to-br from-slate-700 to-slate-800 rounded-2xl shadow-xl overflow-hidden border border-slate-600 cursor-pointer hover:border-blue-400/50 transition-all duration-300"
+        className="substream-card"
         onClick={() => selectSubStream(subStreamId)}
       >
-        <div className="p-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="card-content">
+            <div className="card-header">
             <div className="flex-1">
               <h4 className="text-lg md:text-xl font-bold text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
                 {subStreamData.title}
@@ -720,17 +721,17 @@ const StudentRoadmap = () => {
                 {subStreamData.description}
               </p>
             </div>
-            <ChevronRight className="w-6 h-6 text-cyan-400 flex-shrink-0 ml-4" />
+            <ChevronRight className="chevron-icon flex-shrink-0 ml-4" />
           </div>
           
-          <div className="grid grid-cols-2 gap-4 mt-4">
-            <div className="text-center p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
-              <div className="text-xl md:text-2xl font-bold text-cyan-400">{subStreamData.degrees.length}</div>
-              <div className="text-xs text-gray-400">Degree Options</div>
+          <div className="stats-grid">
+            <div className="stat-box cyan">
+              <div className="stat-number cyan">{subStreamData.degrees.length}</div>
+              <div className="stat-label">Degree Options</div>
             </div>
-            <div className="text-center p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg">
-              <div className="text-xl md:text-2xl font-bold text-purple-400">{subStreamData.careers.length}</div>
-              <div className="text-xs text-gray-400">Career Paths</div>
+            <div className="stat-box purple">
+              <div className="stat-number purple">{subStreamData.careers.length}</div>
+              <div className="stat-label">Career Paths</div>
             </div>
           </div>
         </div>
@@ -750,171 +751,172 @@ const StudentRoadmap = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="space-y-6"
+        className="detailed-view"
       >
         <motion.button
           onClick={goBack}
           whileHover={{ x: -5 }}
-          className="flex items-center gap-3 text-blue-400 hover:text-blue-300 font-semibold text-lg bg-slate-700/60 px-4 py-2 rounded-lg border border-slate-600 hover:border-blue-400/50 transition-all duration-300"
+          className="back-button"
         >
-          <ChevronRight className="w-5 h-5 rotate-180" />
+          <ChevronRight className="chevron-icon-small rotate-180" />
           Back to {streamData.title} Options
         </motion.button>
 
-        <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 rounded-2xl p-6 md:p-8 text-white">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <div className="hero-section">
+          <h2 className="hero-title">
             {subStreamData.title}
           </h2>
-          <p className="text-lg opacity-90" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          <p className="hero-description">
             {subStreamData.description}
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          <div className="hero-stats">
             <div className="bg-white/20 backdrop-blur rounded-xl p-4 border border-white/20">
-              <div className="text-2xl md:text-3xl font-bold">{subStreamData.degrees.length}+</div>
-              <div className="text-sm opacity-90">Degree Programs</div>
+              <div className="hero-stat-number">{subStreamData.degrees.length}+</div>
+              <div className="hero-stat-label">Degree Programs</div>
             </div>
             <div className="bg-white/20 backdrop-blur rounded-xl p-4 border border-white/20">
-              <div className="text-2xl md:text-3xl font-bold">{subStreamData.exams.length}+</div>
-              <div className="text-sm opacity-90">Entrance Exams</div>
+              <div className="hero-stat-number">{subStreamData.exams.length}+</div>
+              <div className="hero-stat-label">Entrance Exams</div>
             </div>
             <div className="bg-white/20 backdrop-blur rounded-xl p-4 border border-white/20">
-              <div className="text-2xl md:text-3xl font-bold">{subStreamData.careers.length}+</div>
-              <div className="text-sm opacity-90">Career Options</div>
+              <div className="hero-stat-number">{subStreamData.careers.length}+</div>
+              <div className="hero-stat-label">Career Options</div>
             </div>
             <div className="bg-white/20 backdrop-blur rounded-xl p-4 border border-white/20">
-              <div className="text-2xl md:text-3xl font-bold">{subStreamData.duration}</div>
-              <div className="text-sm opacity-90">Duration</div>
+              <div className="hero-stat-number">{subStreamData.duration}</div>
+              <div className="hero-stat-label">Duration</div>
             </div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-slate-700/60 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              <GraduationCap className="w-6 h-6 text-cyan-400" />
+        <div className="two-column-grid">
+          <div className="info-card">
+            <h3 className="section-title">
+              <GraduationCap className="section-icon cyan" />
               Available Degrees
             </h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="degree-grid">
               {subStreamData.degrees.map((degree, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="bg-cyan-500/10 border border-cyan-500/30 rounded-xl p-3 text-center hover:bg-cyan-500/20 transition-colors"
+                  className="degree-item"
                 >
-                  <span className="text-sm font-semibold text-cyan-300">{degree}</span>
+                  <span className="degree-text">{degree}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="bg-slate-700/60 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              <BookOpen className="w-6 h-6 text-purple-400" />
+          <div className="info-card">
+            <h3 className="section-title">
+              <BookOpen className="section-icon purple" />
               Entrance Exams
             </h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="degree-grid">
               {subStreamData.exams.map((exam, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-3 text-center hover:bg-purple-500/20 transition-colors"
+                  className="degree-item"
+                  style={{ background: 'rgba(168, 85, 247, 0.1)', borderColor: 'rgba(168, 85, 247, 0.3)' }}
                 >
-                  <span className="text-sm font-semibold text-purple-300">{exam}</span>
+                  <span className="degree-text" style={{ color: '#d8b4fe' }}>{exam}</span>
                 </motion.div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-slate-700/60 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600">
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-            <Briefcase className="w-6 h-6 text-pink-400" />
+        <div className="info-card">
+          <h3 className="section-title">
+            <Briefcase className="section-icon pink" />
             Career Opportunities
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="career-grid">
             {subStreamData.careers.map((career, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className="bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/30 rounded-xl p-4 text-center hover:from-pink-500/20 hover:to-purple-500/20 transition-all duration-300"
+                className="career-item"
               >
-                <span className="text-sm font-semibold text-pink-300">{career}</span>
+                <span className="career-text">{career}</span>
               </motion.div>
             ))}
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-slate-700/60 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              <TrendingUp className="w-6 h-6 text-orange-400" />
+        <div className="two-column-grid">
+          <div className="info-card">
+            <h3 className="section-title">
+              <TrendingUp className="section-icon orange" />
               Specializations
             </h3>
-            <div className="space-y-2">
+            <div className="specialization-list">
               {subStreamData.specializations.map((spec, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="flex items-center gap-3 p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg hover:bg-orange-500/20 transition-colors"
+                  className="specialization-item"
                 >
-                  <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                  <span className="text-sm font-medium text-orange-300">{spec}</span>
+                  <div className="specialization-bullet orange"></div>
+                  <span className="specialization-text orange">{spec}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="bg-slate-700/60 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600">
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-              <Users className="w-6 h-6 text-indigo-400" />
+          <div className="info-card">
+            <h3 className="section-title">
+              <Users className="section-icon indigo" />
               Top Colleges
             </h3>
-            <div className="space-y-2">
+            <div className="specialization-list">
               {subStreamData.topColleges.map((college, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: 10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="flex items-center gap-3 p-3 bg-indigo-500/10 border border-indigo-500/30 rounded-lg hover:bg-indigo-500/20 transition-colors"
+                  className="specialization-item"
                 >
-                  <div className="w-2 h-2 bg-indigo-400 rounded-full"></div>
-                  <span className="text-sm font-medium text-indigo-300">{college}</span>
+                  <div className="specialization-bullet indigo"></div>
+                  <span className="specialization-text indigo">{college}</span>
                 </motion.div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-slate-600/20 to-slate-700/20 backdrop-blur-lg rounded-2xl p-6 text-white border border-slate-500/30">
-          <h3 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <div className="info-card salary-duration-card">
+          <h3 className="section-title">
             💰 Salary Range & Duration
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
-              <div className="text-lg opacity-90 mb-2">Expected Salary Range</div>
-              <div className="text-2xl md:text-3xl font-bold text-green-300">{subStreamData.salaryRange}</div>
+        <div className="two-column-grid">
+            <div className="hero-stat-box">
+              <div className="salary-duration-label">Expected Salary Range</div>
+              <div className="salary-duration-value green">{subStreamData.salaryRange}</div>
             </div>
-            <div className="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
-              <div className="text-lg opacity-90 mb-2">Course Duration</div>
-              <div className="text-2xl md:text-3xl font-bold text-teal-300">{subStreamData.duration}</div>
+            <div className="hero-stat-box">
+              <div className="salary-duration-label">Course Duration</div>
+              <div className="salary-duration-value teal">{subStreamData.duration}</div>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-slate-600/20 via-slate-700/20 to-slate-600/20 backdrop-blur-lg rounded-2xl p-6 text-white border border-slate-500/30">
-          <h3 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <div className="info-card opportunities-card">
+          <h3 className="section-title">
             🚀 Key Opportunities & Growth
           </h3>
-          <p className="text-lg leading-relaxed opacity-95" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          <p className="opportunities-text">
             {subStreamData.opportunities}
           </p>
         </div>
@@ -986,18 +988,18 @@ const StudentRoadmap = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 via-slate-700 to-slate-800">
-      <div className="max-w-screen-2xl mx-auto px-4 py-8">
+    <div className="roadmap-container">
+      <div className="content-wrapper">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="header-section"
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-6" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          <h1 className="main-title">
             🎓 {getLevelTitle()}
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          <p className="main-description">
             Your comprehensive academic journey starts here. Explore detailed roadmaps, career opportunities, and make informed decisions for your future.
           </p>
         </motion.div>
@@ -1006,7 +1008,7 @@ const StudentRoadmap = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 md:gap-6 mb-12"
+          className="level-buttons"
         >
           {["10th", "12th", "UG"].map((lvl, index) => (
             <motion.button
@@ -1020,11 +1022,7 @@ const StudentRoadmap = () => {
                 setSelectedStream(null);
                 setSelectedSubStream(null);
               }}
-              className={`px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-base md:text-lg transition-all duration-300 transform ${
-                currentLevel === lvl
-                  ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-xl scale-105 border-2 border-cyan-400/30"
-                  : "bg-gray-800/60 text-gray-300 hover:bg-gray-700/60 border-2 border-gray-600 hover:border-cyan-500/50 hover:shadow-lg backdrop-blur-sm"
-              }`}
+              className={`level-button ${currentLevel === lvl ? 'active' : ''}`}
               style={{ fontFamily: 'Poppins, sans-serif' }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -1036,18 +1034,18 @@ const StudentRoadmap = () => {
 
         {navigationLevel === 'main' && (
           <div className="space-y-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
+            <div className="main-content-grid">
+              <div className="main-content-left">
                 <motion.div
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                    <span className="text-4xl">📖</span>
+                  <h2 className="section-main-title">
+                    <span className="section-main-icon">📖</span>
                     Choose Your Academic Path
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="stream-cards-grid">
                     {currentLevelData.map((stream, index) => (
                       <MainStreamCard key={stream.id} stream={stream} index={index} />
                     ))}
@@ -1055,18 +1053,18 @@ const StudentRoadmap = () => {
                 </motion.div>
               </div>
 
-              <div className="space-y-6">
+              <div className="main-content-right">
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
-                  className="bg-slate-700/50 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600"
+                  className="chart-card"
                 >
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <BarChart3 className="w-6 h-6 text-blue-400" />
+                  <h3 className="chart-title">
+                    <BarChart3 className="chart-icon blue" />
                     Student Preferences
                   </h3>
-                  <div className="h-64">
+                  <div className="chart-container">
                     {getChartData() && <Bar data={getChartData()} options={chartOptions} />}
                   </div>
                 </motion.div>
@@ -1075,13 +1073,13 @@ const StudentRoadmap = () => {
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  className="bg-slate-700/50 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-600"
+                  className="chart-card"
                 >
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <PieChart className="w-6 h-6 text-purple-400" />
+                  <h3 className="chart-title">
+                    <PieChart className="chart-icon purple" />
                     Distribution Analysis
                   </h3>
-                  <div className="h-64">
+                  <div className="chart-container">
                     {getPieChartData() && <Pie data={getPieChartData()} options={pieChartOptions} />}
                   </div>
                 </motion.div>
@@ -1090,24 +1088,24 @@ const StudentRoadmap = () => {
                   initial={{ opacity: 0, x: 30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
-                  className="bg-gradient-to-r from-slate-600/20 to-slate-700/20 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-slate-500/30"
+                  className="stats-card"
                 >
-                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <TrendingUp className="w-6 h-6 text-green-400" />
+                  <h3 className="chart-title">
+                    <TrendingUp className="chart-icon green" />
                     Quick Stats
                   </h3>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center p-3 bg-white/10 rounded-lg">
-                      <span className="text-gray-300">Total Options</span>
-                      <span className="text-white font-bold">{currentLevelData.length}</span>
+                  <div className="stats-list">
+                    <div className="stat-item">
+                      <span className="stat-label">Total Options</span>
+                      <span className="stat-value">{currentLevelData.length}</span>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-white/10 rounded-lg">
-                      <span className="text-gray-300">Career Paths</span>
-                      <span className="text-white font-bold">50+</span>
+                    <div className="stat-item">
+                      <span className="stat-label">Career Paths</span>
+                      <span className="stat-value">50+</span>
                     </div>
-                    <div className="flex justify-between items-center p-3 bg-white/10 rounded-lg">
-                      <span className="text-gray-300">Success Rate</span>
-                      <span className="text-white font-bold">95%</span>
+                    <div className="stat-item">
+                      <span className="stat-label">Success Rate</span>
+                      <span className="stat-value">95%</span>
                     </div>
                   </div>
                 </motion.div>
@@ -1122,21 +1120,21 @@ const StudentRoadmap = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                <span className="text-3xl md:text-4xl">🔍</span>
+            <div className="stream-header">
+              <h2 className="stream-title">
+                <span className="stream-icon">🔍</span>
                 Choose Your Specialization
               </h2>
               <motion.button
                 onClick={goBack}
                 whileHover={{ x: -3 }}
-                className="flex items-center gap-2 text-blue-400 hover:text-blue-300 font-medium bg-slate-700/60 px-4 py-2 rounded-lg border border-slate-600 hover:border-blue-400/50 transition-all duration-300"
+                className="back-button-small"
               >
-                <ChevronRight className="w-4 h-4 rotate-180" />
+                <ChevronRight className="chevron-icon-small rotate-180" />
                 Back
               </motion.button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="substream-grid">
               {Object.entries(roadmapData[currentLevel].find(s => s.id === selectedStream).subStreams).map(([subStreamId, subStreamData], index) => (
                 <SubStreamCard key={subStreamId} subStreamId={subStreamId} subStreamData={subStreamData} index={index} />
               ))}
@@ -1152,45 +1150,45 @@ const StudentRoadmap = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-12 bg-gradient-to-r from-slate-600/20 via-slate-700/20 to-slate-600/20 backdrop-blur-lg rounded-3xl shadow-xl p-6 md:p-8 border border-slate-500/20"
+          className="guidance-section"
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center" style={{ fontFamily: 'Poppins, sans-serif' }}>
+          <h2 className="guidance-title">
             🎯 Expert Guidance & Resources
           </h2>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6">
+          <div className="guidance-grid">
             <motion.div 
               whileHover={{ scale: 1.03, y: -3 }}
-              className="bg-slate-600/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-slate-500/20 hover:bg-slate-600/15 transition-all"
+              className="guidance-card"
             >
-              <div className="text-3xl md:text-4xl mb-3 md:mb-4">🔍</div>
-              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              <div className="guidance-icon">🔍</div>
+              <h3 className="guidance-card-title">
                 Research Thoroughly
               </h3>
-              <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+              <p className="guidance-card-text">
                 Explore all available options, understand requirements, and make informed decisions based on your interests and strengths.
               </p>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.03, y: -3 }}
-              className="bg-slate-600/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-slate-500/20 hover:bg-slate-600/15 transition-all"
+              className="guidance-card"
             >
-              <div className="text-3xl md:text-4xl mb-3 md:mb-4">❤️</div>
-              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              <div className="guidance-icon">❤️</div>
+              <h3 className="guidance-card-title">
                 Follow Your Passion
               </h3>
-              <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+              <p className="guidance-card-text">
                 Choose a path that aligns with your natural interests and strengths for long-term success and satisfaction.
               </p>
             </motion.div>
             <motion.div 
               whileHover={{ scale: 1.03, y: -3 }}
-              className="bg-slate-600/10 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-slate-500/20 hover:bg-slate-600/15 transition-all"
+              className="guidance-card"
             >
-              <div className="text-3xl md:text-4xl mb-3 md:mb-4">🚀</div>
-              <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              <div className="guidance-icon">🚀</div>
+              <h3 className="guidance-card-title">
                 Future Growth
               </h3>
-              <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+              <p className="guidance-card-text">
                 Consider fields with strong career prospects, continuous learning opportunities, and industry growth potential.
               </p>
             </motion.div>

@@ -6,7 +6,7 @@ import StudentRoadmap from './student/StudentRoadmap'
 function App() {
   return (
     <div>
-       <StudentRoadmap/>
+    <StudentRoadmap/>
     </div>
   )
 }

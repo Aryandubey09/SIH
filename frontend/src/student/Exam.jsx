@@ -1,186 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import './Exam.css';
 
 const Exam = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isRegionDropdownOpen, setIsRegionDropdownOpen] = useState(false);
-  const [exams, setExams] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [selectedRegion, setSelectedRegion] = useState('all');
   const [showAllExams, setShowAllExams] = useState(false);
-  const [sarkariExams, setSarkariExams] = useState([]);
-  const [sarkariLoading, setSarkariLoading] = useState(false);
+  const [isRegionDropdownOpen, setIsRegionDropdownOpen] = useState(false);
 
-  // Fetch real exam data from reliable government APIs
-  useEffect(() => {
-    const fetchExams = async () => {
-      try {
-        setLoading(true);
-        let examsData = [];
-        
-        // Use real government APIs with accurate exam dates
-        try {
-          // NTA Exams API (JEE, NEET, CUET)
-          const ntaResponse = await fetch('https://nta.ac.in/api/exam-calendar');
-          if (ntaResponse.ok) {
-            const ntaData = await ntaResponse.json();
-            if (ntaData && ntaData.exams) {
-              examsData = [...examsData, ...parseNTAExams(ntaData)];
-              console.log(`Fetched ${ntaData.exams.length} NTA exams`);
-            }
-          }
-        } catch (err) {
-          console.log('NTA API failed:', err);
-        }
-
-        try {
-          // UPSC Exams API
-          const upscResponse = await fetch('https://upsc.gov.in/api/examinations/calendar');
-          if (upscResponse.ok) {
-            const upscData = await upscResponse.json();
-            if (upscData && upscData.examinations) {
-              examsData = [...examsData, ...parseUPSCExams(upscData)];
-              console.log(`Fetched ${upscData.examinations.length} UPSC exams`);
-            }
-          }
-        } catch (err) {
-          console.log('UPSC API failed:', err);
-        }
-
-        try {
-          // SSC Exams API
-          const sscResponse = await fetch('https://ssc.nic.in/api/examination-calendar');
-          if (sscResponse.ok) {
-            const sscData = await sscResponse.json();
-            if (sscData && sscData.examinations) {
-              examsData = [...examsData, ...parseSSCExams(sscData)];
-              console.log(`Fetched ${sscData.examinations.length} SSC exams`);
-            }
-          }
-        } catch (err) {
-          console.log('SSC API failed:', err);
-        }
-
-        try {
-          // IBPS Banking Exams API
-          const ibpsResponse = await fetch('https://ibps.in/api/exam-schedule');
-          if (ibpsResponse.ok) {
-            const ibpsData = await ibpsResponse.json();
-            if (ibpsData && ibpsData.exams) {
-              examsData = [...examsData, ...parseIBPSExams(ibpsData)];
-              console.log(`Fetched ${ibpsData.exams.length} IBPS exams`);
-            }
-          }
-        } catch (err) {
-          console.log('IBPS API failed:', err);
-        }
-
-        try {
-          // Railway RRB Exams API
-          const rrbResponse = await fetch('https://rrbcdg.gov.in/api/exam-calendar');
-          if (rrbResponse.ok) {
-            const rrbData = await rrbResponse.json();
-            if (rrbData && rrbData.exams) {
-              examsData = [...examsData, ...parseRRBExams(rrbData)];
-              console.log(`Fetched ${rrbData.exams.length} RRB exams`);
-            }
-          }
-        } catch (err) {
-          console.log('RRB API failed:', err);
-        }
-
-        try {
-          // JKSSB Exams API
-          const jkssbResponse = await fetch('https://jkssb.nic.in/api/examination-calendar');
-          if (jkssbResponse.ok) {
-            const jkssbData = await jkssbResponse.json();
-            if (jkssbData && jkssbData.examinations) {
-              examsData = [...examsData, ...parseJKSSBExams(jkssbData)];
-              console.log(`Fetched ${jkssbData.examinations.length} JKSSB exams`);
-            }
-          }
-        } catch (err) {
-          console.log('JKSSB API failed:', err);
-        }
-
-        try {
-          // JKPSC Exams API
-          const jkpscResponse = await fetch('https://jkpsc.nic.in/api/examination-calendar');
-          if (jkpscResponse.ok) {
-            const jkpscData = await jkpscResponse.json();
-            if (jkpscData && jkpscData.examinations) {
-              examsData = [...examsData, ...parseJKPSCExams(jkpscData)];
-              console.log(`Fetched ${jkpscData.examinations.length} JKPSC exams`);
-            }
-          }
-        } catch (err) {
-          console.log('JKPSC API failed:', err);
-        }
-
-        try {
-          // CTET Exams API
-          const ctetResponse = await fetch('https://ctet.nic.in/api/exam-calendar');
-          if (ctetResponse.ok) {
-            const ctetData = await ctetResponse.json();
-            if (ctetData && ctetData.exams) {
-              examsData = [...examsData, ...parseCTETExams(ctetData)];
-              console.log(`Fetched ${ctetData.exams.length} CTET exams`);
-            }
-          }
-        } catch (err) {
-          console.log('CTET API failed:', err);
-        }
-
-        try {
-          // Defence Exams API (NDA, CDS)
-          const defenceResponse = await fetch('https://joinindianarmy.nic.in/api/exam-calendar');
-          if (defenceResponse.ok) {
-            const defenceData = await defenceResponse.json();
-            if (defenceData && defenceData.exams) {
-              examsData = [...examsData, ...parseDefenceExams(defenceData)];
-              console.log(`Fetched ${defenceData.exams.length} Defence exams`);
-            }
-          }
-        } catch (err) {
-          console.log('Defence API failed:', err);
-        }
-        
-        // Always include static real exam data as base with accurate dates
-        console.log('Adding static real exam data with accurate dates');
-        const staticExams = getAccurateRealExams();
-        examsData = [...examsData, ...staticExams];
-        console.log(`Total exams after adding static data: ${examsData.length}`);
-        
-        // Set government job exams with accurate dates
-        setSarkariLoading(true);
-        try {
-          const govJobExams = getAccurateGovernmentExams();
-          setSarkariExams(govJobExams);
-          console.log(`Loaded ${govJobExams.length} accurate government job exams`);
-        } catch (err) {
-          console.log('Error setting government job exams:', err);
-          setSarkariExams([]);
-        } finally {
-          setSarkariLoading(false);
-        }
-        
-        setExams(examsData);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching exams:', err);
-        setError('Failed to fetch exams. Showing static exam data.');
-        const staticExams = getAccurateRealExams();
-        console.log(`Using static fallback: ${staticExams.length} exams`);
-        setExams(staticExams);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExams();
-  }, []);
+  // Static exam data for upcoming Indian exams
+  const exams = getUpcomingIndianExams();
 
   // Parse NTA Exams API data
   const parseNTAExams = (data) => {
@@ -575,8 +404,8 @@ const Exam = () => {
     return feesMap[examType] || feesMap['government'];
   };
 
-  // Get accurate real exam data with CONFIRMED dates from official sources
-  const getAccurateRealExams = () => {
+  // Get upcoming Indian exams with correct data
+  const getUpcomingIndianExams = () => {
     const today = new Date();
     const currentYear = today.getFullYear();
     
@@ -1288,14 +1117,14 @@ const Exam = () => {
   };
 
   // Error boundary fallback
-  if (error && !exams.length) {
+  if (!exams.length) {
     return (
       <div className="exam-container">
         <div className="error-container">
-          <h2>⚠️ Something went wrong</h2>
-          <p>{error}</p>
+          <h2>⚠️ No exams available</h2>
+          <p>Please check back later for upcoming exams.</p>
           <button onClick={handleRefresh} className="refresh-button">
-            🔄 Try Again
+            🔄 Refresh
           </button>
         </div>
       </div>
@@ -1378,23 +1207,7 @@ const Exam = () => {
         </div>
       </div>
 
-      {/* Loading State */}
-      {loading && (
-        <div className="loading-container">
-          <div className="loading-spinner">🔄</div>
-          <p>Fetching real exam data from official APIs...</p>
-          <p style={{fontSize: '0.9rem', color: '#95a5a6', marginTop: '10px'}}>
-            NTA • UPSC • SSC • IBPS • RRB • JKSSB • JKPSC • CTET • Defence
-          </p>
-        </div>
-      )}
 
-      {/* Error State */}
-      {error && (
-        <div className="error-container">
-          <p>⚠️ {error}</p>
-        </div>
-      )}
 
       {/* Exam Cards */}
       {!loading && (
@@ -1426,7 +1239,7 @@ const Exam = () => {
                       
                       <div className="exam-details">
                         <div className="exam-date">
-                          <span className="label">📅 Exam Date:</span>
+                          <span className="label">📅 Exam:</span>
                           <span className="value">{exam.examDate.toLocaleDateString()}</span>
                         </div>
                         <div className="last-date">
@@ -1437,11 +1250,6 @@ const Exam = () => {
                           <span className="label">💰 Fees:</span>
                           <span className="value">{exam.fees}</span>
                         </div>
-                      </div>
-                      
-                      <div className="syllabus-section">
-                        <span className="label">📚 Syllabus:</span>
-                        <p className="syllabus">{exam.syllabus}</p>
                       </div>
                     </div>
                     
@@ -1468,78 +1276,7 @@ const Exam = () => {
             </div>
           )}
 
-          {/* Government Jobs Special Section */}
-          {sarkariLoading ? (
-            <div className="sarkari-result-section">
-              <h3 className="section-title">🏛️ Latest Government Jobs</h3>
-              <div className="loading-container">
-                <div className="loading-spinner">🔄</div>
-                <p>Loading government job exams...</p>
-              </div>
-            </div>
-          ) : sarkariExams && sarkariExams.length > 0 ? (
-            <div className="sarkari-result-section">
-              <h3 className="section-title">🏛️ Latest Government Jobs</h3>
-              <div className="sarkari-exams-grid">
-                {sarkariExams.slice(0, 3).map(exam => {
-                  const daysRemaining = getDaysRemaining(exam.lastRegistrationDate);
-                  const urgencyColor = getUrgencyColor(daysRemaining);
-                  
-                  return (
-                    <div 
-                      key={exam.id}
-                      className={`exam-card sarkari-card ${exam.priority}`}
-                      onClick={() => handleCardClick(exam.website)}
-                    >
-                      <div className="card-header">
-                        <h3 className="exam-name">{exam.name}</h3>
-                        <div 
-                          className="days-remaining"
-                          style={{ backgroundColor: urgencyColor }}
-                        >
-                          {daysRemaining > 0 ? `${daysRemaining} days left` : 'Closed'}
-                        </div>
-                      </div>
-                      
-                      <div className="card-body">
-                        <p className="description">{exam.description}</p>
-                        <div className="exam-details">
-                          <div className="last-date">
-                            <span className="label">⏰ Last Date:</span>
-                            <span className="value">{exam.lastRegistrationDate.toLocaleDateString()}</span>
-                          </div>
-                          <div className="fees">
-                            <span className="label">💰 Fees:</span>
-                            <span className="value">{exam.fees}</span>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="card-footer">
-                        <span className="source-tag">🏛️ Gov Jobs</span>
-                        <span className="click-hint">Click to visit →</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              
-              {sarkariExams.length > 3 && (
-                <div className="see-more-container">
-                  <button className="see-more-button sarkari-button" onClick={handleSeeMore}>
-                    📋 View All Government Jobs ({sarkariExams.length})
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : !sarkariLoading && (
-            <div className="sarkari-result-section">
-              <h3 className="section-title">🏛️ Latest Government Jobs</h3>
-              <div className="no-exams">
-                <p>No government job exams available at the moment.</p>
-              </div>
-            </div>
-          )}
+
         </>
       )}
 
@@ -1592,45 +1329,7 @@ const Exam = () => {
                   </div>
                 )}
 
-                {/* Government Jobs Exams */}
-                {sarkariExams && sarkariExams.length > 0 && (
-                  <div className="exam-section">
-                    <h3>🏛️ Government Jobs</h3>
-                    {sarkariExams.map(exam => {
-                      if (!exam) return null;
-                      const daysRemaining = getDaysRemaining(exam.lastRegistrationDate);
-                      const urgencyColor = getUrgencyColor(daysRemaining);
-                      
-                      return (
-                        <div 
-                          key={exam.id}
-                          className={`list-exam-item sarkari-item ${exam.priority}`}
-                          onClick={() => handleCardClick(exam.website)}
-                        >
-                          <div className="list-exam-header">
-                            <h4 className="list-exam-name">{exam.name}</h4>
-                            <div 
-                              className="list-days-remaining"
-                              style={{ backgroundColor: urgencyColor }}
-                            >
-                              {daysRemaining > 0 ? `${daysRemaining} days left` : 'Closed'}
-                            </div>
-                          </div>
-                          
-                          <div className="list-exam-details">
-                            <span className="list-exam-date">📅 {exam.examDate.toLocaleDateString()}</span>
-                            <span className="list-exam-fees">💰 {exam.fees}</span>
-                            <span className="list-exam-type">🏷️ {exam.type}</span>
-                            <span className="source-tag">🏛️ Gov Jobs</span>
-                            {exam.region === 'jammukashmir' && <span className="jk-tag">📍 J&K</span>}
-                          </div>
-                          
-                          <p className="list-exam-description">{exam.description}</p>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
+
               </div>
             </div>
           </div>
