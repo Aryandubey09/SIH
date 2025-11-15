@@ -1,12 +1,12 @@
 import React from 'react'
-import Scholarship from './student/Scholarship'
+import StudentRoadmap from './student/StudentRoadmap'
 
 
 
 function App() {
   return (
     <div>
-           <Scholarship/>
+       <StudentRoadmap/>
     </div>
   )
 }
